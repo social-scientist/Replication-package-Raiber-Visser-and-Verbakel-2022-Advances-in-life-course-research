@@ -31,7 +31,7 @@ set maxvar 32767
 capture log close
 
 *working director
-cd "\\CNAS.RU.NL\U679219\Documents\own data" //adapt to own 
+cd "" //adapt to own 
 ******************************************************************************
 *load March data (only caregivers)
 use "L_Mantelzorg_04p", clear // March data that we received from LISS. Note that these are not 100 % the same as the once online. We received a data set including background variables not included in the data in the LISS archive. Below is a small section on how to use the data from the archive. One person less will be included in the main analysis due to missing on the background variables. The main conclusions do not change when using the archive data. If you want to have our data set please contact LISS or me (Klara Raiber). The same holds for the screening data used later in the code. The screening data can be found online via: https://www.dataarchive.lissdata.nl/study_units/view/1287. 
@@ -1602,8 +1602,8 @@ capture log close
 
 set seed 21091994
 
-*cd "U:\P2"  // adapt to your environment
-cd "\\CNAS.RU.NL\U679219\Documents\own data"
+cd ""  // adapt to your environment
+
 *********************************************
 *look at screening data
 *********************************************
@@ -1754,7 +1754,7 @@ replace pension_year = . if pension_year == 2008
 keep nomem_encr pension_year pension_year_withoutself income_before age_before oplcat_before partner_before aantalki_before brutoink_f_19 belbezig_before
 gen episode = 1
 
-cd "\\CNAS.RU.NL\U679219\Documents\own data"
+cd ""
 save "pension_year.dta", replace
 */
 drop _merge
@@ -1919,7 +1919,7 @@ replace wages_samey = cat_wage_`x' if pension_year == `x' & cat_wage_`x' != .
 }
 
 *calculate weekly instead of yearly income
-replace wages_samey = (wages_samey)/52  //weekly wage - HERE WE HAVE A PRECISION PROBLEM - Stata does not round the same way each time which is why this variable is always different. This has effects for the rest of the results as this variable is the main basis of the outcome variable and therefore also for the imputation belowe. 
+replace wages_samey = (wages_samey)/52  //weekly wage - HERE WE HAVE A PRECISION PROBLEM - Stata does not round the same way each time which is why this variable is always different. This has effects for the rest of the results as this variable is the main basis of the outcome variable and therefore also for the imputation below. 
 tab wages_samey, m
 bysort belbezig: sum wages_samey
 
